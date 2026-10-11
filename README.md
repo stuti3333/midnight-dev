@@ -52,3 +52,37 @@ Suggested workspace roles:
 - Workspace 4: Monitoring and debugging
 
 The script uses GNOME's `gsettings` and is intended for GNOME desktop sessions.
+
+## Bonus Feature: Dynamic Theme Switcher
+
+Midnight Dev includes a dynamic theme switcher that lets you change your desktop wallpaper and Kitty terminal color palette with one command.
+
+### Available Themes
+
+- **Midnight Space** — A dark space-inspired theme with cyan and violet accents.
+- **Midnight Violet** — A deeper violet theme with lavender and cyan accents.
+
+### Usage
+
+Switch to Midnight Space:
+
+```bash
+midnight-theme space
+```
+
+Switch to Midnight Violet:
+
+```bash
+midnight-theme violet
+```
+
+The script updates the GNOME desktop wallpaper and saves the corresponding Kitty color palette. Open a new Kitty window or restart Kitty to apply the terminal colors.
+
+### Implementation
+
+- Wallpapers are stored in `wallpapers/`.
+- Kitty color palettes are stored in `configs/kitty/`.
+- The theme-switching script is located at `scripts/midnight-theme.sh`.
+- The installer installs the theme palettes and makes the theme-switching command available as `midnight-theme`.
+
+This feature adds quick visual customization without requiring manual wallpaper or terminal configuration changes.
