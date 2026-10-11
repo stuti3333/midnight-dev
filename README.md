@@ -19,7 +19,15 @@ A customized, keyboard-driven developer workstation built on Fedora Linux and GN
 - Git and GNU Stow
 
 ## Screenshots
-See the `screenshots/` directory.
+
+### Desktop
+![Midnight Desktop](screenshots/desktop.png)
+
+### System Status
+![System Status](screenshots/system-status.png)
+
+### Terminal — Fastfetch
+![Terminal Fastfetch](screenshots/terminal-fastfetch.png)
 
 ## Installation
 Installation instructions will be added as the setup is completed.
