@@ -4,64 +4,75 @@ set -euo pipefail
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 BIN="$HOME/.local/bin"
 DATA="$HOME/.local/share/midnight-dev"
-CONFIG="$HOME/.config"
-BACKUP="$DATA/backups/$(date +%Y%m%d-%H%M%S)"
+MANIFEST="$DATA/install-manifest.tsv"
+BACKUPS="$DATA/backups"
 
-if [[ ! -d "$ROOT/scripts" || ! -d "$ROOT/configs" ]]; then
-    echo "Error: run this installer from the Midnight Dev project package."
+[[ -d "$ROOT/configs" && -d "$ROOT/scripts" && -d "$ROOT/wallpapers" ]] || {
+    echo "Error: incomplete Midnight Dev project."
     exit 1
-fi
+}
 
-mkdir -p "$BIN" "$DATA" "$CONFIG" "$BACKUP"
-touch "$DATA/backups.log"
+mkdir -p "$BIN" "$DATA" "$BACKUPS"
+touch "$MANIFEST"
 
-backup_file() {
+track_target() {
     local target="$1"
+    local backup
+
+    if awk -F '\t' -v p="$target" '$2 == p { found=1 } END { exit !found }' "$MANIFEST"; then
+        return
+    fi
+
     if [[ -e "$target" || -L "$target" ]]; then
-        mkdir -p "$BACKUP$(dirname "$target")"
-        cp -a "$target" "$BACKUP$target"
-        printf '%s\t%s\n' "$target" "$BACKUP$target" >> "$DATA/backups.log"
+        backup="$BACKUPS/$(date +%Y%m%d-%H%M%S)-$$-$(basename "$target")"
+        cp -a "$target" "$backup"
+        printf 'EXISTED\t%s\t%s\n' "$target" "$backup" >> "$MANIFEST"
+    else
+        printf 'CREATED\t%s\t-\n' "$target" >> "$MANIFEST"
     fi
 }
 
-install_config() {
+install_file() {
     local source="$1" target="$2"
+    track_target "$target"
     mkdir -p "$(dirname "$target")"
-    backup_file "$target"
-    cp -a "$source" "$target"
+    cp "$source" "$target"
 }
 
-echo "Installing Midnight Dev for your user..."
+echo "Installing Midnight Dev..."
 
-install_config "$ROOT/configs/kitty/kitty.conf" \
-    "$CONFIG/kitty/kitty.conf"
-install_config "$ROOT/configs/fastfetch/config.jsonc" \
-    "$CONFIG/fastfetch/config.jsonc"
+install_file "$ROOT/configs/kitty/kitty.conf" \
+    "$HOME/.config/kitty/kitty.conf"
+
+install_file "$ROOT/configs/fastfetch/config.jsonc" \
+    "$HOME/.config/fastfetch/config.jsonc"
 
 for script in midnight-status.sh configure-workspaces.sh; do
-    install -m 755 "$ROOT/scripts/$script" "$BIN/$script"
+    install_file "$ROOT/scripts/$script" "$BIN/$script"
+    chmod 755 "$BIN/$script"
 done
 
-cat > "$DATA/midnight-aliases.sh" <<'ALIASES'
+install_file "$ROOT/scripts/midnight-prompt.sh" \
+    "$DATA/midnight-prompt.sh"
+
+ALIASES="$DATA/midnight-aliases.sh"
+track_target "$ALIASES"
+cat > "$ALIASES" <<'ALIASES_EOF'
+alias croot='cd "$HOME/Projects/midnight-dev"'
 alias gs='git status'
 alias gl='git log --oneline --graph --decorate -10'
 alias sysinfo='midnight-status.sh'
 alias update='sudo dnf upgrade --refresh'
 alias ports='ss -tuln'
 alias cls='clear'
-alias croot='cd "$HOME"'
 if command -v btop >/dev/null 2>&1; then
     alias monitor='btop'
 fi
-ALIASES
+ALIASES_EOF
 
-install -m 644 "$ROOT/scripts/midnight-prompt.sh" \
-    "$DATA/midnight-prompt.sh"
-
-if ! grep -qF '# >>> Midnight Dev >>>' "$HOME/.bashrc" 2>/dev/null; then
-    touch "$HOME/.bashrc"
-    backup_file "$HOME/.bashrc"
-    cat >> "$HOME/.bashrc" <<'BASHRC'
+touch "$HOME/.bashrc"
+if ! grep -qF '# >>> Midnight Dev >>>' "$HOME/.bashrc"; then
+    cat >> "$HOME/.bashrc" <<'BASHRC_EOF'
 
 # >>> Midnight Dev >>>
 if [[ $- == *i* ]]; then
@@ -71,7 +82,7 @@ if [[ $- == *i* ]]; then
         source "$HOME/.local/share/midnight-dev/midnight-prompt.sh"
 fi
 # <<< Midnight Dev <<<
-BASHRC
+BASHRC_EOF
 fi
 
 mkdir -p "$HOME/Pictures/Wallpapers/Midnight-Dev"
@@ -79,11 +90,9 @@ cp -n "$ROOT"/wallpapers/* "$HOME/Pictures/Wallpapers/Midnight-Dev/" 2>/dev/null
 
 echo
 echo "Midnight Dev installed."
-echo "Scripts: $BIN"
-echo "Kitty/Fastfetch configs installed."
-echo "Wallpapers: $HOME/Pictures/Wallpapers/Midnight-Dev"
-echo
-echo "Open a new terminal or run: source ~/.bashrc"
-echo "GNOME workspace shortcuts are optional:"
-echo "  $BIN/configure-workspaces.sh"
-echo "Uninstall: $ROOT/uninstall.sh"
+echo "Open a new Bash terminal or run: source ~/.bashrc"
+echo "System status: midnight-status.sh"
+echo "Optional GNOME workspace setup: $BIN/configure-workspaces.sh"
+echo "Existing files are backed up under: $BACKUPS"
+echo "Uninstall with: $ROOT/uninstall.sh"
+echo "Note: wallpapers are intentionally retained after uninstall."
