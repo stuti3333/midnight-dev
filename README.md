@@ -1,102 +1,157 @@
+
 # Midnight Dev
 
-A customized, keyboard-driven developer workstation built on Fedora Linux and GNOME.
+**A keyboard-driven, visually consistent Linux developer workstation built on Fedora, GNOME, and Kitty.**
+
+Midnight Dev brings terminal customization, desktop theming, workspace shortcuts, system monitoring, and reusable setup scripts into one project.
 
 ## Features
-- Unified dark violet and cyan theme
-- Developer terminal configuration
-- Keyboard-driven workflow
-- CPU, RAM and battery monitoring
-- Wayland screenshots
-- Portable dotfiles and setup scripts
 
-## Tech Stack
-- Fedora Linux
-- GNOME / Wayland
-- Kitty
-- Fastfetch
-- Bash
-- Git and GNU Stow
+- Three coordinated themes: Midnight Space, Midnight Violet, and Midnight Green
+- Dynamic wallpaper and Kitty terminal palette switching
+- Customized Kitty terminal and Fastfetch configuration
+- Bash prompt and developer aliases
+- CPU load, RAM usage, uptime, and battery monitoring
+- Four-workspace GNOME workflow
+- Installation backups and an uninstall script
+- Desktop screenshots and reusable configuration files
 
 ## Screenshots
 
-### Desktop
-![Midnight Desktop](screenshots/desktop.png)
+### Midnight Green Desktop
+
+![Midnight Green desktop](screenshots/midnight-green-desktop.png)
+
+### Desktop Overview
+
+![Midnight Dev desktop](screenshots/desktop.png)
 
 ### System Status
-![System Status](screenshots/system-status.png)
 
-### Terminal — Fastfetch
-![Terminal Fastfetch](screenshots/terminal-fastfetch.png)
+![System status](screenshots/system-status.png)
+
+### Terminal and Fastfetch
+
+![Kitty terminal with Fastfetch](screenshots/terminal-fastfetch.png)
+
+## Tech Stack
+
+- Fedora Linux
+- GNOME on Wayland
+- Kitty terminal
+- Fastfetch
+- Bash
+- Git
+
+## Requirements
+
+- Fedora Linux with a GNOME desktop session
+- Bash and Git
+- Kitty terminal
+- Fastfetch for the system information display
+- GNOME `gsettings` for wallpaper and desktop settings
 
 ## Installation
-Installation instructions will be added as the setup is completed.
+
+Clone the repository:
+
+    git clone https://github.com/stuti3333/midnight-dev.git
+    cd midnight-dev
+
+Install Kitty and Fastfetch if they are not already installed:
+
+    sudo dnf install kitty fastfetch
+
+Run the installer:
+
+    chmod +x install.sh
+    ./install.sh
+
+Open a new Bash terminal or reload your shell configuration:
+
+    source ~/.bashrc
+
+The installer backs up existing tracked configuration files under:
+
+    ~/.local/share/midnight-dev/backups/
+
+Configure the GNOME workspace shortcuts when desired:
+
+    ~/.local/bin/configure-workspaces.sh
+
+## Dynamic Theme Switcher
+
+Change your wallpaper and Kitty color palette using one command.
+
+| Theme | Command |
+|---|---|
+| Midnight Space | `midnight-theme space` |
+| Midnight Violet | `midnight-theme violet` |
+| Midnight Green | `midnight-theme green` |
+
+Open a new Kitty window after switching to apply the new terminal palette.
 
 ## Keyboard Shortcuts
-Documented as shortcuts are configured.
-
-## GNOME Workspace Shortcuts
-
-Run `./scripts/configure-workspaces.sh` to configure four workspaces.
 
 | Shortcut | Action |
 |---|---|
+| Super + Enter | Open Kitty terminal, if configured |
+| Super | Open GNOME Overview and search for applications |
+| Alt + Tab | Switch between open windows |
+| PrtSc | Open GNOME screenshot controls |
 | Super + 1–4 | Switch to workspace 1–4 |
 | Super + Shift + 1–4 | Move the active window to workspace 1–4 |
 
-Suggested workspace roles:
+The terminal shortcut may need to be configured separately. Verify custom bindings in GNOME Settings before relying on them.
 
-- Workspace 1: Coding
-- Workspace 2: Terminal and development servers
-- Workspace 3: Research and documentation
-- Workspace 4: Monitoring and debugging
+## System Status
 
-The script uses GNOME's `gsettings` and is intended for GNOME desktop sessions.
+Run:
 
-## Bonus Feature: Dynamic Theme Switcher
+    midnight-status.sh
 
-Midnight Dev includes a dynamic theme switcher that lets you change your desktop wallpaper and Kitty terminal color palette with one command.
+The script displays:
 
-### Available Themes
+- System uptime
+- CPU load averages over 1, 5, and 15 minutes
+- RAM usage in GiB and as a percentage
+- Battery level and charging status, when available
 
-- **Midnight Space** — A dark space-inspired theme with cyan and violet accents.
-- **Midnight Violet** — A deeper violet theme with lavender and cyan accents.
+This is a refreshable command-line status report, not a continuously updating status bar.
 
-### Usage
+## Project Structure
 
-Switch to Midnight Space:
+    configs/
+      fastfetch/
+      kitty/
+    scripts/
+      configure-workspaces.sh
+      midnight-aliases.sh
+      midnight-prompt.sh
+      midnight-status.sh
+      midnight-theme.sh
+    wallpapers/
+    screenshots/
+    install.sh
+    uninstall.sh
+    README.md
 
-```bash
-midnight-theme space
-```
+## Uninstallation
 
-Switch to Midnight Violet:
+Run the uninstall script from the cloned repository:
 
-```bash
-midnight-theme violet
-```
+    ./uninstall.sh
 
-The script updates the GNOME desktop wallpaper and saves the corresponding Kitty color palette. Open a new Kitty window or restart Kitty to apply the terminal colors.
+Review the script and its backup behavior before running it. Wallpapers are intentionally retained, and desktop settings may need to be restored separately.
 
-### Implementation
+## Design Goals
 
-- Wallpapers are stored in `wallpapers/`.
-- Kitty color palettes are stored in `configs/kitty/`.
-- The theme-switching script is located at `scripts/midnight-theme.sh`.
-- The installer installs the theme palettes and makes the theme-switching command available as `midnight-theme`.
+- Consistent dark visual styling
+- Keyboard-first navigation
+- Lightweight Bash utilities
+- Reusable dotfiles and setup scripts
+- Clear installation and recovery instructions
 
-This feature adds quick visual customization without requiring manual wallpaper or terminal configuration changes.
+## Author
 
-### Midnight Green
-
-A forest-inspired dark theme featuring emerald green, teal, and amber accents.
-
-Switch to this theme with:
-
-    midnight-theme green
-
-The theme switcher updates the GNOME desktop wallpaper and Kitty terminal palette.
-
-## Midnight Green Desktop
-
-![Midnight Green desktop](screenshots/midnight-green-desktop.png)
+Created as a customized developer desktop project for Linux.
