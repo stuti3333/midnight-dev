@@ -183,7 +183,7 @@ The command changes the desktop wallpaper and selects the corresponding Kitty pa
 
 Watch the project demonstration below:
 
-[▶️ Watch Screen Recording](screenvid.mp4)
+[▶️ Watch Screen Recording](https://github.com/user-attachments/assets/70c875a3-00ff-44a2-a2b1-5c4f3088a2e4)
 
 
 ## 📊 System Monitoring
