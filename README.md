@@ -96,3 +96,7 @@ Switch to this theme with:
     midnight-theme green
 
 The theme switcher updates the GNOME desktop wallpaper and Kitty terminal palette.
+
+## Midnight Green Desktop
+
+![Midnight Green desktop](screenshots/midnight-green-desktop.png)
