@@ -179,6 +179,13 @@ midnight-theme green
 
 The command changes the desktop wallpaper and selects the corresponding Kitty palette. Open a new Kitty window to see the updated terminal colors.
 
+## 🎥 Screen Recording
+
+Watch the project demonstration below:
+
+[▶️ Watch Screen Recording](screenvid.mp4)
+
+
 ## 📊 System Monitoring
 
 Run the system status script using:
