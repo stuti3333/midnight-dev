@@ -1,4 +1,4 @@
-# Midnight Dev
+# 🌙 Midnight Dev
 
 **A personalized Fedora Linux desktop built for developers who love dark aesthetics, keyboard-driven workflows, and a terminal-first environment.**
 
@@ -8,15 +8,15 @@ The goal is to create a desktop that looks consistent, feels comfortable to use,
 
 ## ✨ Features
 
-- **Three custom themes:** Midnight Space, Midnight Violet, and Midnight Green.
-- **Kitty terminal customization:** Matching color palettes for all three themes.
-- **Fastfetch integration:** A personalized system information display.
-- **System monitoring:** View uptime, CPU load, RAM usage, and battery information when available.
-- **Keyboard-driven workflow:** Shortcuts for switching workspaces and moving windows.
-- **One-command theme switching:** Change the terminal palette and desktop wallpaper.
-- **Developer aliases:** Quick commands for Git, project navigation, and system utilities.
-- **Installation and rollback scripts:** Back up existing configuration files and restore tracked files during uninstallation.
-- **Custom wallpapers:** Three wallpapers coordinated with the project themes.
+- 🎨 **Three custom themes:** Midnight Space, Midnight Violet, and Midnight Green.
+- 🖥️ **Kitty terminal customization:** Matching color palettes for all three themes.
+- ⚡ **Fastfetch integration:** A personalized system information display.
+- 📊 **System monitoring:** View uptime, CPU load, RAM usage, and battery information when available.
+- ⌨️ **Keyboard-driven workflow:** Shortcuts for switching workspaces and moving windows.
+- 🖼️ **Custom wallpapers:** Three wallpapers coordinated with the project themes.
+- 🔄 **One-command theme switching:** Change the terminal palette and desktop wallpaper.
+- 🧰 **Developer aliases:** Quick commands for Git, project navigation, and system utilities.
+- 🛡️ **Installation and rollback scripts:** Back up existing configuration files and restore tracked files during uninstallation.
 
 ## 🎨 Themes
 
@@ -28,17 +28,29 @@ Midnight Dev includes three visual themes, each with a matching Kitty palette an
 | Midnight Violet | Dark tones with violet accents | `midnight-violet.conf` |
 | Midnight Green | Dark tones with green accents | `midnight-green.conf` |
 
+### 🌌 Midnight Space
+
+![Midnight Space wallpaper](wallpapers/midnight-space.png)
+
+A deep, space-inspired look designed for a calm and focused development environment.
+
+### 💜 Midnight Violet
+
+![Midnight Violet wallpaper](wallpapers/midnight-violet.png)
+
+A dark theme with violet accents for a distinctive, modern desktop aesthetic.
+
+### 💚 Midnight Green
+
+![Midnight Green wallpaper](wallpapers/midnight-green.png)
+
+A dark green palette designed for a clean, understated developer workspace.
+
 The theme switcher updates the current Kitty palette, changes the desktop wallpaper, and enables GNOME's dark color preference.
-
-### Theme assets
-
-- Wallpapers: `wallpapers/`
-- Kitty palettes: `configs/kitty/`
-- Theme switcher: `scripts/midnight-theme.sh`
 
 ## 📸 Screenshot Gallery
 
-These screenshots demonstrate the desktop appearance, terminal customization, and system-monitoring features.
+The following screenshots demonstrate the desktop appearance, terminal customization, and system-monitoring features.
 
 ### 1. Desktop Overview
 
@@ -56,8 +68,6 @@ These screenshots demonstrate the desktop appearance, terminal customization, an
 
 ![Kitty terminal displaying Fastfetch system information](screenshots/terminal-fastfetch.png)
 
-*The gallery shows the screenshots currently available in the repository. Dedicated screenshots of the Midnight Space and Midnight Violet desktops can be added later.*
-
 ## 🖥️ Desktop Environment
 
 Midnight Dev is designed for Fedora Linux using GNOME.
@@ -71,7 +81,7 @@ Midnight Dev is designed for Fedora Linux using GNOME.
 | Bash | Shell aliases and prompt integration |
 | Bash scripts | Theme switching, system monitoring, installation, and rollback |
 
-The desktop's final appearance may also depend on the GNOME theme, extensions, wallpaper, and settings installed on the system.
+The final appearance may also depend on the GNOME theme, extensions, wallpaper, and settings installed on the system.
 
 ## ⌨️ Keyboard Shortcuts
 
@@ -127,7 +137,7 @@ cd midnight-dev
 ./install.sh
 ```
 
-The installer checks for required applications and project files, backs up tracked configuration files before replacing them, installs the terminal and Fastfetch configurations, installs the helper scripts, and copies wallpapers without overwriting existing files.
+The installer checks for required applications and project files, backs up tracked configuration files before replacing them, installs terminal and Fastfetch configurations, installs helper scripts, and copies wallpapers without overwriting existing files.
 
 ### 3. Reload Bash
 
