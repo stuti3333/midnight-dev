@@ -86,3 +86,13 @@ The script updates the GNOME desktop wallpaper and saves the corresponding Kitty
 - The installer installs the theme palettes and makes the theme-switching command available as `midnight-theme`.
 
 This feature adds quick visual customization without requiring manual wallpaper or terminal configuration changes.
+
+### Midnight Green
+
+A forest-inspired dark theme featuring emerald green, teal, and amber accents.
+
+Switch to this theme with:
+
+    midnight-theme green
+
+The theme switcher updates the GNOME desktop wallpaper and Kitty terminal palette.

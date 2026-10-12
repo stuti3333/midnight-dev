@@ -47,6 +47,14 @@ install_file "$ROOT/configs/kitty/kitty.conf" \
 install_file "$ROOT/configs/fastfetch/config.jsonc" \
     "$HOME/.config/fastfetch/config.jsonc"
 
+install_file "$ROOT/configs/kitty/midnight-space.conf" "$DATA/midnight-space.conf"
+install_file "$ROOT/configs/kitty/midnight-violet.conf" "$DATA/midnight-violet.conf"
+install_file "$ROOT/configs/kitty/midnight-green.conf" "$DATA/midnight-green.conf"
+install_file "$ROOT/configs/kitty/midnight-space.conf" "$DATA/current-theme.conf"
+
+install_file "$ROOT/scripts/midnight-theme.sh" "$BIN/midnight-theme"
+chmod 755 "$BIN/midnight-theme"
+
 for script in midnight-status.sh configure-workspaces.sh; do
     install_file "$ROOT/scripts/$script" "$BIN/$script"
     chmod 755 "$BIN/$script"
